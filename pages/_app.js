@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }) {
   if (isLoading) {
     return <h1>is loading...</h1>;
   }
+  console.log(pieces);
   return (
     <>
       <GlobalStyle />

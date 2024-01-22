@@ -7,9 +7,10 @@ export default function ArtPieces({ pieces }) {
         return (
           <ArtPiecePreview
             key={slug}
-            name={name}
+            slug={slug}
+            title={name}
             artist={artist}
-            imageSource={imageSource}
+            image={imageSource}
           />
         );
       })}
