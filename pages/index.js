@@ -1,19 +1,20 @@
 import ArtPieces from "@/components/ArtPieces";
+import Spotlight from "@/components/Spotlight";
 import useSWR from "swr";
 
 export default function HomePage() {
-  // const fetcher = (url) =>
-  //   fetch(url).then((r) => {
-  //     return r.json();
-  //   });
   const fetcher = async (url) => {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Request with ${JSON.stringify(args)} failed.`);
     }
-    //console.log("response.json():", await response.json());
     return response.json();
   };
+  function getRandomIndex(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  }
   const {
     data: pieces,
     isLoading,
@@ -27,9 +28,14 @@ export default function HomePage() {
   if (isLoading) {
     return <h1>is loading...</h1>;
   }
+  const randomIndex = getRandomIndex(0, pieces.length);
   console.log("pieces: ", pieces);
   return (
     <div>
+      <Spotlight
+        image={pieces[randomIndex].imageSource}
+        artist={pieces[randomIndex].artist}
+      />
       <ArtPieces pieces={pieces} />
     </div>
   );
